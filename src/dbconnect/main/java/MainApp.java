@@ -16,7 +16,9 @@ public class MainApp {
 
 			try {	
 				ob1 = new DBUtilities();
-				mostrarTodosLosPedidos();
+				mostrarTodosLosPedidosOdenadosPorPrecioTotal();
+				mostrarTodosLosClientes();
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -36,7 +38,7 @@ public class MainApp {
 		}
 	}
 	
-	public static void mostrarTodosLosPedidos() {
+	public static void mostrarTodosLosPedidosOdenadosPorPrecioTotal() {
 		try {
 			List<Pedido> tmp =  ob1.getAllOrders();
 			for (Pedido ped : tmp) {

@@ -36,6 +36,9 @@ public class DBUtilities {
 		loadProperties();
 	}
 	
+	//TODO: crear el metodo que devuelva una lista de Lineas (sera llamado para crear pedido)
+	//TODO: crear el metodo que devuelva una lista de pedidos (sera llamado por crear cliente)
+	
 	
 	
 	public void loadProperties() throws SQLException {
@@ -77,10 +80,10 @@ public class DBUtilities {
 		ResultSet rs=statement.executeQuery("""
 											SELECT P.*
 											FROM Linea L, Pedido P
-											WHERE L.idPedido LIKE P.id
-											GROUP BY L.idPedido, P.id
-											ORDER BY SUM(L.precio) DESC;
-											""") ;
+											WHERE L.idPedido LIKE P.id 
+											GROUP BY L.idPedido, P.id 
+											ORDER BY SUM(L.precio*L.cantidad) DESC;
+											""");
 
 		
 		while(rs.next()) {//Avanza de posición en el listado de registros y devuelve true si existe tal
@@ -96,10 +99,20 @@ public class DBUtilities {
 	
 	public void deleteCustomer(int idClienteABorrar) throws SQLException {
 					
-		PreparedStatement st = connection.prepareStatement("DELETE FROM Cliente WHERE id = ?");
+		
+		//TODO: solucionar excepcion que salta cundo se hace un delete a un cliente que tiene clases dependientes
+		//Hay una violacion de clave foranea al borrar el cliente cuando tiene pedidos (usad como ejemplo el cliente 4)
+		//Podrias probar a hacer una consulta para comprobar si el cliente tiene hijos y si su hijo tiene hijos y una vez hecho eso, borrar en orden inverso
+		// Otra opcion es deshabilitar la fk justo antes de borrar y despues añadirla de nuevo
+		//Otra es cambiar la configuracion de la base de datos para añadir un "delete on cascade"(alter table)
+		
+		PreparedStatement st = connection.prepareStatement("DELETE  FROM Cliente WHERE id = ?");
 		st.setInt(1, idClienteABorrar);
 		st.executeUpdate(); 
 
+		//hay una forma mas corta de hacer esto mismo (sin tener en cuenta la excepcion)
+		//statement.execute(String.format("DELETE  FROM Cliente WHERE id = %s", idClienteABorrar));
+		//Asi no hay que añadir ningun objeto nuevo y es minimamente mas entendible 
 	}
 	
 }

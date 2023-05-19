@@ -1,5 +1,7 @@
 package dbconnect.main.java.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,12 +89,16 @@ public class Cliente {
 	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+	
+	public int getEdad() {
+		return LocalDate.now().minusYears(LocalDate.parse(this.fechaNacimiento, DateTimeFormatter.ofPattern("yyyy-mm-D")).getYear()).getYear();
+	}
+
 
 
 	@Override
 	public String toString() {
-		return "Alumno [id=" + id + ", name=" + nombre + ", apellidos=" + apellidos + ", fecha de nacimiento=" + fechaNacimiento + ", email=" + email
-				+ "]";
+		return String.format("|%s | %s | %s | %s | %s |", this.nombre, this.apellidos, this.email, this.fechaNacimiento,this.getEdad());
 	}
 	
 	public List<Pedido> getPedidos() {

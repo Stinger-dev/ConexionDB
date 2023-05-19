@@ -11,7 +11,8 @@ public class Pedido {
 	private int idCliente;
 	private List<Linea> lineas;
 	
-	
+	//TODO: añadir un campo importe que sea la suma del valor de las lineas
+	//Que al cargar los datos todos los campos de lineas se completen
 	
 	public Pedido(int id, String codigo, String status, int idCliente, List<Linea> lineas) {
 		super();
@@ -63,6 +64,7 @@ public class Pedido {
 	public String toString() {
 		return "Pedido [id=" + id + ", codigo=" + codigo + ", status=" + status + ", idCliente=" + idCliente
 				+ ", lineas=" + lineas + "]";
+		//return String.format("|%s | %s | %s | %s | %s |", this.codigo, this.status, this.email, this.lineas.size(),this.importe); 
 	}
 	
 	
