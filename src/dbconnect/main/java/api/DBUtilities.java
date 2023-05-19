@@ -31,7 +31,7 @@ public class DBUtilities {
 	private static Connection connection; 
 	private static Statement statement;
 	
-	public DBUtilities() throws SQLException {
+	public DBUtilities() throws SQLException { 
 		super();
 		loadProperties();
 	}
@@ -54,7 +54,7 @@ public class DBUtilities {
 	
 	
 	
-	public List<Cliente> getAllClients() throws NumberFormatException, SQLException {
+	public List<Cliente> getAllClients() throws SQLException  {
 		List<Cliente> output = new ArrayList<>();
 		
 		ResultSet rs=statement.executeQuery("select * from Cliente");  
@@ -74,7 +74,14 @@ public class DBUtilities {
 	public List<Pedido> getAllOrders() throws NumberFormatException, SQLException {
 		List<Pedido> output = new ArrayList<>();
 	
-		ResultSet rs=statement.executeQuery("select * from Pedido");  
+		ResultSet rs=statement.executeQuery("""
+											SELECT P.*
+											FROM Linea L, Pedido P
+											WHERE L.idPedido LIKE P.id
+											GROUP BY L.idPedido, P.id
+											ORDER BY SUM(L.precio) DESC;
+											""") ;
+
 		
 		while(rs.next()) {//Avanza de posición en el listado de registros y devuelve true si existe tal
 			Pedido tmpPedido = new Pedido(Integer.valueOf(rs.getString(1)), rs.getString(2), rs.getString(3), Integer.valueOf(rs.getString(4)));
@@ -92,9 +99,7 @@ public class DBUtilities {
 		PreparedStatement st = connection.prepareStatement("DELETE FROM Cliente WHERE id = ?");
 		st.setInt(1, idClienteABorrar);
 		st.executeUpdate(); 
-		
-		
-		
+
 	}
 	
 }

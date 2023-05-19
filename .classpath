@@ -17,6 +17,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/estudiante/WE_DAWB/WSs/ws1/ConexionDB/mysql_connection_jar/mysql-connector-j-8.0.32.jar"/>
+	<classpathentry kind="lib" path="C:/Users/gonza/Desktop/Informatica/Daw/Primero/Programacion/ConexionDB/mysql_connection_jar/mysql-connector-j-8.0.32.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
