@@ -8,13 +8,16 @@ import dbconnect.main.java.api.DBUtilities;
 
 public class MainApp {
 
-
 		public static void main(String[] args) {
 	
 				try {
+					
 					DBUtilities ob1 = new DBUtilities();
 					System.out.println(ob1.getAllClients());
 					System.out.println(ob1.getAllOrders());
+					
+					//System.out.println(ob1.deleteCustomer(2));
+					//System.out.println(ob1.getAllClients());
 
 					
 				} catch (SQLException e) {
@@ -22,6 +25,12 @@ public class MainApp {
 				}
 		
 				
+				/*private int id;
+				private String nombre;
+				private String apellidos;
+				private String dni;
+				private String email;
+				private String fechaNacimiento;*/
 		
 		}
 }

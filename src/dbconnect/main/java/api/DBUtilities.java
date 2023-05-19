@@ -36,6 +36,8 @@ public class DBUtilities {
 		loadProperties();
 	}
 	
+	
+	
 	public void loadProperties() throws SQLException {
 		try {
 			Properties properties = new Properties();
@@ -67,6 +69,8 @@ public class DBUtilities {
 	
 	}
 	
+	
+	
 	public List<Pedido> getAllOrders() throws NumberFormatException, SQLException {
 		List<Pedido> output = new ArrayList<>();
 	
@@ -79,6 +83,18 @@ public class DBUtilities {
 	
 		return output;
 	
+	}
+	
+	
+	
+	public void deleteCustomer(int idClienteABorrar) throws SQLException {
+					
+		PreparedStatement st = connection.prepareStatement("DELETE FROM Cliente WHERE id = ?");
+		st.setInt(1, idClienteABorrar);
+		st.executeUpdate(); 
+		
+		
+		
 	}
 	
 }

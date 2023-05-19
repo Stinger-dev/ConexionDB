@@ -21,9 +21,14 @@ public class Pedido {
 		this.idCliente = idCliente;
 		this.lineas = lineas;
 	}
+	
+	
 	public Pedido(int id, String codigo, String status, int idCliente) {
 		this(id, codigo, status, idCliente, new ArrayList<>());
 	}
+	
+	
+	
 	public int getId() {
 		return id;
 	}
