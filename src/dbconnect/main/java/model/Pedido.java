@@ -10,22 +10,25 @@ public class Pedido {
 	private String status;
 	private int idCliente;
 	private List<Linea> lineas;
+	private String nombreDugno;
 	
 	//TODO: añadir un campo importe que sea la suma del valor de las lineas
 	//Que al cargar los datos todos los campos de lineas se completen
 	
-	public Pedido(int id, String codigo, String status, int idCliente, List<Linea> lineas) {
+	public Pedido(int id, String codigo, String status, int idCliente, String nombreDugno, List<Linea> lineas) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.status = status;
 		this.idCliente = idCliente;
 		this.lineas = lineas;
+		this.nombreDugno = nombreDugno;
+		
 	}
 	
 	
-	public Pedido(int id, String codigo, String status, int idCliente) {
-		this(id, codigo, status, idCliente, new ArrayList<>());
+	public Pedido(int id, String codigo, String status, int idCliente, String nombreDugno ) {
+		this(id, codigo, status, idCliente, nombreDugno, new ArrayList<>());
 	}
 	
 	
@@ -60,11 +63,17 @@ public class Pedido {
 	public void setLineas(List<Linea> lineas) {
 		this.lineas = lineas;
 	}
+	
+	public double getImporte() {
+		double output = 0;
+		for(Linea li : this.lineas) {
+			output += li.getValorTotalLinea(); 
+		}
+		return output;
+	}
 	@Override
 	public String toString() {
-		return "Pedido [id=" + id + ", codigo=" + codigo + ", status=" + status + ", idCliente=" + idCliente
-				+ ", lineas=" + lineas + "]";
-		//return String.format("|%s | %s | %s | %s | %s |", this.codigo, this.status, this.email, this.lineas.size(),this.importe); 
+		return String.format("| %-11s| %-12s| %-20s| %-4s| %-7s|", this.codigo, this.status, this.nombreDugno, this.lineas.size(),this.getImporte()); 
 	}
 	
 	

@@ -14,9 +14,10 @@ public class Cliente {
 	private String email;
 	private String fechaNacimiento;
 	private List<Pedido> pedidos;
+	private String genero;
 	
 	
-	public Cliente(int id, String nombre, String apellidos, String fechaNacimiento, String email, List <Pedido> pedidos) {
+	public Cliente(int id, String nombre, String apellidos, String email, String fechaNacimiento,String genero, List <Pedido> pedidos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -24,10 +25,11 @@ public class Cliente {
 		this.fechaNacimiento = fechaNacimiento;
 		this.email = email;
 		this.pedidos = pedidos;
+		this.genero = genero;
 	}
 	
-	public Cliente(int id, String nombre, String apellidos, String fechaNacimiento, String email) {
-		this(id,nombre,apellidos,fechaNacimiento,email, new ArrayList<>());
+	public Cliente(int id, String nombre, String apellidos, String fechaNacimiento, String email,String genero) {
+		this(id,nombre,apellidos,fechaNacimiento,email, genero,new ArrayList<>());
 	}
 
 
@@ -98,7 +100,7 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return String.format("|%s | %s | %s | %s | %s |", this.nombre, this.apellidos, this.email, this.fechaNacimiento,this.getEdad());
+		return String.format("| %-15s| %-15s| %-40s| %-4s| %-8s |", this.nombre, this.apellidos, this.email, this.getEdad(), (this.genero.equals("M"))? "Hombre" : "Mujer");
 	}
 	
 	public List<Pedido> getPedidos() {

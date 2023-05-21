@@ -2,6 +2,7 @@ package dbconnect.main.java.model;
 
 public class Linea {
 	
+	private int id;
 	private String codigo;
 	private String nombreProducto;
 	private int idPedido;
@@ -9,8 +10,9 @@ public class Linea {
 	private double precio;
 	
 	
-	public Linea(String codigo, String nombreProducto, int idPedido, int cantidad, double precio) {
+	public Linea(int id, String codigo, String nombreProducto, int idPedido, int cantidad, double precio) {
 		super();
+		this.id = id;
 		this.codigo = codigo;
 		this.nombreProducto = nombreProducto;
 		this.idPedido = idPedido;
@@ -66,6 +68,15 @@ public class Linea {
 
 	public void setPrecio(double precio) {
 		this.precio = precio;
+	}
+
+	public double getValorTotalLinea() {
+		return this.cantidad*this.precio;
+	}
+
+	@Override
+	public String toString() {	
+		return String.format("| %-5s| %-15s| %-35s| %-3s| %-4s | %-4s|", this.id, this.codigo, this.nombreProducto, this.idPedido, this.cantidad, this.cantidad);
 	}
 	
 	
