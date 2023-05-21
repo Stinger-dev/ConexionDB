@@ -37,6 +37,11 @@ public class DBUtilities {
 	}
 	
 	
+	//Para crear un cliente tambien tenemos que añadir sus tablas hijas primero, asi que el orden deberia ser algo asi
+		//TODO: crear codigo para añadir lineas
+		//TODO: crear codigo para añadir pedidos
+		//TODO: crear codigo para añadir cliente
+	
 	
 	
 	public void loadProperties() throws SQLException {
@@ -210,5 +215,11 @@ public class DBUtilities {
 		//statement.execute(String.format("DELETE  FROM Cliente WHERE id = %s", idClienteABorrar));
 		//Asi no hay que añadir ningun objeto nuevo y es minimamente mas entendible 
 	}
+	
+	
+	
+
+	
+
 	
 }
