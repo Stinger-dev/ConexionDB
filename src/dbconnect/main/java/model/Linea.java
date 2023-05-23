@@ -79,6 +79,10 @@ public class Linea {
 		return String.format("| %-5s| %-15s| %-35s| %-3s| %-4s | %-4s|", this.id, this.codigo, this.nombreProducto, this.idPedido, this.cantidad, this.cantidad);
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
 	
 	
 

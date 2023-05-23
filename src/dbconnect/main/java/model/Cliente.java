@@ -10,7 +10,6 @@ public class Cliente {
 	private int id;
 	private String nombre;
 	private String apellidos;
-	private String dni;
 	private String email;
 	private String fechaNacimiento;
 	private List<Pedido> pedidos;
@@ -63,14 +62,6 @@ public class Cliente {
 	}
 
 
-	public String getDni() {
-		return dni;
-	}
-
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
 
 
 	public String getEmail() {
@@ -109,6 +100,8 @@ public class Cliente {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-	
+	public String getGenero() {
+		return genero;
+	}
 
 }

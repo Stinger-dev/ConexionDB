@@ -16,7 +16,8 @@ public class MainApp {
 
 			try {	
 				ob1 = new DBUtilities();
-				System.out.println(ob1.getClienteCompleto(4).getPedidos().toString());
+				ob1.addLineaAPedido(new Linea(513452, "jokhdb", "jamon", 1, 2, 20));
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -52,7 +53,7 @@ public class MainApp {
 	public static void mostrarTodosLasLineasDePedido(int idPedido) {
 		try {
 			List<Linea> tmp =  ob1.getLineasPedido(idPedido);
-			//System.out.println("| Codigo | Status | Nombre Completo Cliente | Nº Productos | Importe |");
+			System.out.println("| Codigo | Status | Nombre Completo Cliente | Nº Productos | Importe |");
 			for (Linea ped : tmp) {
 				System.out.println(ped.toString());
 			}
@@ -60,5 +61,15 @@ public class MainApp {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public static void agnadirPedido(Pedido pedido) {
+		try {
+			ob1.addOrder(pedido);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 }

@@ -195,6 +195,19 @@ public class DBUtilities {
 		
 	}
 	
+	public void addOrder(Pedido pedido) throws SQLException {
+	    Connection conexion = iniciarConexion();
+	    PreparedStatement orden = conexion.prepareStatement("INSERT INTO Pedido(id, status, idCliente) VALUES(?,?,?)");
+	    orden.setInt(1, pedido.getId());
+	    orden.setString(2, pedido.getStatus());
+	    orden.setInt(3, pedido.getIdCliente());
+	    orden.executeUpdate();
+	    
+	    
+		terminarConexion(conexion);
+
+	}
+	
 
 	public void deleteCustomer(int idClienteABorrar) throws SQLException {
 					
@@ -216,9 +229,85 @@ public class DBUtilities {
 		//Asi no hay que añadir ningun objeto nuevo y es minimamente mas entendible 
 	}
 	
+	public void addClient(Cliente clienteAnadir) throws SQLException {
+		
+		Connection conexion = iniciarConexion();
+		PreparedStatement st = conexion.prepareStatement("INSERT INTO Cliente VALUES(?, ?, ?, ?, ?, ?);");
+		
+		st.setInt(1, clienteAnadir.getId());
+		st.setString(2, clienteAnadir.getNombre());
+		st.setString(3, clienteAnadir.getApellidos());
+		st.setString(4, clienteAnadir.getEmail());
+		st.setString(5, clienteAnadir.getFechaNacimiento());
+		st.setString(6, clienteAnadir.getGenero());
+		st.executeUpdate();
+		
+		terminarConexion(conexion);
+	}
+	
+	public void addOrders(Pedido pedido) throws SQLException {
+		Connection conexion = iniciarConexion();
+		PreparedStatement statement = conexion.prepareStatement("INSERT INTO Pedido VALUES (? ,? ,?, ?)");
+		
+		statement.setInt(1, pedido.getId());
+		statement.setString(2, pedido.getCodigo());
+		statement.setString(3, pedido.getStatus());
+		statement.setInt(4, pedido.getIdCliente());
+		
+		statement.executeUpdate();
+		terminarConexion(conexion);
+	}
 	
 	
-
+	public void addLineaAPedido(Linea linea ) throws SQLException {
+		
+		if(getStatus(linea.getIdPedido()).equalsIgnoreCase("PROCESANDO")) {
+			Connection conexion = iniciarConexion();
+			PreparedStatement statement = conexion.prepareStatement("INSERT INTO Linea VALUES (? ,? ,?, ?,?,?);");
+			
+			statement.setInt(1, linea.getId());
+			statement.setString(2, linea.getCodigo());
+			statement.setString(3, linea.getNombreProducto());
+			statement.setInt(4, linea.getIdPedido());
+			statement.setInt(5, linea.getCantidad());
+			statement.setDouble(6, linea.getPrecio());
+			
+			statement.executeUpdate();
+			terminarConexion(conexion);
+		}else {
+			throw new SQLException("No se ha podido añadir el pedido");
+		}
+		
+		
+		
+	}
+	
+	private String getStatus(int idPedido) throws SQLException {
+		String output = "";
+	    Connection conexion = iniciarConexion();
+		
+	    
+		PreparedStatement statement = conexion.prepareStatement("SELECT P.status FROM Pedido P, Linea L WHERE L.idPedido = P.id AND L.idPedido = ?;");
+		
+ 		
+		ResultSet rs=statement.executeQuery(String.format("SELECT P.status FROM Pedido P, Linea L WHERE L.idPedido = P.id AND L.idPedido = %s;", idPedido)); 
+		
+		
+		while(rs.next()) {//Avanza de posición en el listado de registros y devuelve true si existe tal
+			output = rs.getString("status");
+		}
+		terminarConexion(conexion);
+		return output;
+		
+	}
+	
+	
+	public void updateCliente(Cliente nuevosDatos) {
+		
+	}
+	
+	
+	
 	
 
 	
