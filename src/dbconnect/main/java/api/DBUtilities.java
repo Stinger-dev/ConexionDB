@@ -305,18 +305,17 @@ public class DBUtilities {
 	public void updateCliente(Cliente nuevosDatos) throws SQLException {
 		
 		Connection conexion = iniciarConexion();
-		//UPDATE Cliente SET nombre  = '', apellido = '', email = '', fechaNacimiento = '', genero = '' WHERE id  = ?;
-		/*
-		PreparedStatement st = conexion.prepareStatement("INSERT INTO Cliente VALUES(?, ?, ?, ?, ?, ?);");
+
+		PreparedStatement st = conexion.prepareStatement("UPDATE Cliente SET nombre  = ?, apellido = ?, email = ?, fechaNacimiento = ?, genero = ? WHERE id  = ?;");
 		
-		st.setInt(1, nuevosDatos.getId());
-		st.setString(2, nuevosDatos.getNombre());
-		st.setString(3, nuevosDatos.getApellidos());
-		st.setString(4, nuevosDatos.getEmail());
-		st.setString(5, nuevosDatos.getFechaNacimiento());
-		st.setString(6, nuevosDatos.getGenero());
+		st.setString(1, nuevosDatos.getNombre());
+		st.setString(2, nuevosDatos.getApellidos());
+		st.setString(3, nuevosDatos.getEmail());
+		st.setString(4, nuevosDatos.getFechaNacimiento());
+		st.setString(5, nuevosDatos.getGenero());
+		st.setInt(6, nuevosDatos.getId());
 		st.executeUpdate();
-		*/
+		
 		terminarConexion(conexion);
 	}
 	

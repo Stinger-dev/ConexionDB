@@ -1,6 +1,5 @@
 package dbconnect.main.java;
 
-import java.lang.System.Logger;
 import java.sql.SQLException;
 import java.util.List;
 
