@@ -16,7 +16,7 @@ public class MainApp {
 
 			try {	
 				ob1 = new DBUtilities();
-				ob1.addLineaAPedido(new Linea(513452, "jokhdb", "jamon", 1, 2, 20));
+				ob1.addLineaAPedido(new Linea(87342, "jokhdb", "jamon", 89, 2, 20));
 				
 			} catch (SQLException e) {
 				e.printStackTrace();

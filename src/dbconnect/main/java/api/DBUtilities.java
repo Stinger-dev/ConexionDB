@@ -302,12 +302,43 @@ public class DBUtilities {
 	}
 	
 	
-	public void updateCliente(Cliente nuevosDatos) {
+	public void updateCliente(Cliente nuevosDatos) throws SQLException {
 		
+		Connection conexion = iniciarConexion();
+		//UPDATE Cliente SET nombre  = '', apellido = '', email = '', fechaNacimiento = '', genero = '' WHERE id  = ?;
+		/*
+		PreparedStatement st = conexion.prepareStatement("INSERT INTO Cliente VALUES(?, ?, ?, ?, ?, ?);");
+		
+		st.setInt(1, nuevosDatos.getId());
+		st.setString(2, nuevosDatos.getNombre());
+		st.setString(3, nuevosDatos.getApellidos());
+		st.setString(4, nuevosDatos.getEmail());
+		st.setString(5, nuevosDatos.getFechaNacimiento());
+		st.setString(6, nuevosDatos.getGenero());
+		st.executeUpdate();
+		*/
+		terminarConexion(conexion);
 	}
 	
 	
+	public void deleteClient(Cliente cliente) throws SQLException {
+		
+		Connection conexion = iniciarConexion();
+		
+		PreparedStatement statement = conexion.prepareStatement("DELETE FROM Linea WHERE Linea.idPedido IN (SELECT Pedido.id FROM Pedido, Cliente WHERE Pedido.idCliente = Cliente.id AND Cliente.id = ?);");
+					statement.setInt(1, cliente.getId());	
+					statement.executeUpdate();
+					
+					PreparedStatement statement2 = conexion.prepareStatement("DELETE FROM Pedido WHERE Pedido.idCliente = ?");
+					statement2.setInt(1, cliente.getId());	
+					statement2.executeUpdate();
+					
+					PreparedStatement statement3 = conexion.prepareStatement("DELETE FROM Cliente WHERE Cliente.id = ?");
+					statement3.setInt(1, cliente.getId());	
+					statement3.executeUpdate();
 	
+		terminarConexion(conexion);
+	}
 	
 
 	
