@@ -286,7 +286,9 @@ public class DBUtilities {
 		
 		Connection conexion = iniciarConexion();
 
-		PreparedStatement st = conexion.prepareStatement("UPDATE Cliente SET nombre  = ?, apellido = ?, email = ?, fechaNacimiento = ?, genero = ? WHERE id  = ?;");
+		PreparedStatement st = conexion.prepareStatement("UPDATE Cliente SET nombre  = ?, apellido = ?, email = ?, fechaNacimiento = STR_TO_DATE(?,'%d/%m/%Y'), genero = ? WHERE id  = ?;");
+		
+
 		
 		st.setString(1, nuevosDatos.getNombre());
 		st.setString(2, nuevosDatos.getApellidos());
