@@ -208,26 +208,6 @@ public class DBUtilities {
 
 	}
 	
-
-	public void deleteCustomer(int idClienteABorrar) throws SQLException {
-					
-		
-		//TODO: solucionar excepcion que salta cundo se hace un delete a un cliente que tiene clases dependientes
-		//Hay una violacion de clave foranea al borrar el cliente cuando tiene pedidos (usad como ejemplo el cliente 4)
-		//Podrias probar a hacer una consulta para comprobar si el cliente tiene hijos y si su hijo tiene hijos y una vez hecho eso, borrar en orden inverso
-		// Otra opcion es deshabilitar la fk justo antes de borrar y despues añadirla de nuevo
-		//Otra es cambiar la configuracion de la base de datos para añadir un "delete on cascade"(alter table)
-		Connection conexion = iniciarConexion();
-		
-		PreparedStatement st = conexion.prepareStatement("DELETE  FROM Cliente WHERE id = ?");
-		st.setInt(1, idClienteABorrar);
-		st.executeUpdate(); 
-		terminarConexion(conexion);
-
-		//hay una forma mas corta de hacer esto mismo (sin tener en cuenta la excepcion)
-		//statement.execute(String.format("DELETE  FROM Cliente WHERE id = %s", idClienteABorrar));
-		//Asi no hay que añadir ningun objeto nuevo y es minimamente mas entendible 
-	}
 	
 	public void addClient(Cliente clienteAnadir) throws SQLException {
 		
