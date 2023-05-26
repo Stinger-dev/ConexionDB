@@ -193,18 +193,7 @@ public class DBUtilities {
 		
 	}
 	
-	public void addOrder(Pedido pedido) throws SQLException {
-	    Connection conexion = iniciarConexion();
-	    PreparedStatement orden = conexion.prepareStatement("INSERT INTO Pedido(id, status, idCliente) VALUES(?,?,?)");
-	    orden.setInt(1, pedido.getId());
-	    orden.setString(2, pedido.getStatus());
-	    orden.setInt(3, pedido.getIdCliente());
-	    orden.executeUpdate();
-	    
-	    
-		terminarConexion(conexion);
 
-	}
 	
 	
 	public void addClient(Cliente clienteAnadir) throws SQLException {

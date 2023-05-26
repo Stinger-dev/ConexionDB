@@ -289,7 +289,7 @@ public class MainApp {
 	/* ---------------- Método agnadirPedido() ----------------- */
 	public static void agnadirPedido(Pedido pedido) {
 		try {
-			ob1.addOrder(pedido);
+			ob1.addOrders(pedido);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
