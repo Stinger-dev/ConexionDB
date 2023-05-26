@@ -286,7 +286,7 @@ public class DBUtilities {
 		//Para poder actualizar el clietne se pasa por paremetro el cliente con los datos modificados, para poder pasar el string fecha a date usamos una funcion de MYSQL
 		Connection conexion = iniciarConexion();
 
-		PreparedStatement st = conexion.prepareStatement("UPDATE Cliente SET nombre  = ?, apellido = ?, email = ?, fechaNacimiento = STR_TO_DATE(?,'%d/%m/%Y'), genero = ? WHERE id  = ?;");
+		PreparedStatement st = conexion.prepareStatement("UPDATE Cliente SET nombre  = ?, apellido = ?, email = ?, fechaNacimiento = STR_TO_DATE(?,'%d-%m-%Y'), genero = ? WHERE id  = ?;");
 		
 
 		
